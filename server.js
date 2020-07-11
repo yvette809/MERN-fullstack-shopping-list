@@ -1,14 +1,15 @@
 const express = require ("express")
 const mongoose = require("mongoose")
 const bodyParser = require ('body-parser')
+const cors = require("cors")
 
 const items = require('./models/routes/api/items')
-
 
 
 const server = express()
 
 //server.use (bodyParser.json())
+server.use(cors())
 server.use(express.json())
 
 // connect to database

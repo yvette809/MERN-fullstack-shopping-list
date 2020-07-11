@@ -21,6 +21,16 @@ router.get('/', (req,res) =>{
 })
 
 // get a single item
+router.get('/:id', async(req,res,next) =>{
+    const item = await Item.findById(req.params.id)
+    if(item){
+        res.status(200).send(item)
+    }else{
+        const error = new Error()
+        error.httpStatusCode = 404
+        next(error)
+    }
+})
 
 // create a post
 //sol 1
@@ -38,6 +48,24 @@ router.post('/', async(req,res)=>{
     const response = await newItem.save()
     res.status(201).send(response)
 
+})
+
+// find and update item
+
+router.put('/:id', async(req,res,next)=>{
+    try{
+        const item= await Item.findByIdAndUpdate(req.params.id,req.body)
+        if(item){
+            res.status(200).send(item)
+        }else{
+            const error = new Error()
+            error.httpStatusCode= 404
+            next(error)
+        }
+
+    }catch(error){
+        next(error)
+    }
 })
 
 
