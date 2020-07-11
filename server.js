@@ -8,7 +8,8 @@ const items = require('./models/routes/api/items')
 
 const server = express()
 
-server.use (bodyParser.json())
+//server.use (bodyParser.json())
+server.use(express.json())
 
 // connect to database
 mongoose.connect("mongodb://localhost:27017/mern_shopping",{
